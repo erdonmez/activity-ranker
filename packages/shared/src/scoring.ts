@@ -1,4 +1,4 @@
-import { ActivityRanking, DayScore, DayWeather } from './types';
+import type { ActivityRanking, DayScore, DayWeather } from './types';
 
 export function buildActivityRankings(days: DayWeather[]): ActivityRanking[] {
   const dates = (
