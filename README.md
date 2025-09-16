@@ -42,6 +42,11 @@ Stack: Next.js + Apollo Server + GraphQL + TypeScript.
    - Frontend: http://localhost:3000
    - GraphQL Playground: http://localhost:4000
 
+## Caching
+
+- **Server**: In-memory cache with 30min TTL (configurable via `CACHE_TTL_MS`)
+- **Recent searches**: Stored in localStorage for quick access
+
 ## Environment Configuration
 
 ### Client (.env.local)

@@ -8,6 +8,7 @@ import {
   fetchMarine,
 } from './services/openMeteo.js';
 import { buildActivityRankings } from '../../packages/shared/dist/scoring.js';
+import { CacheManager } from './lib/cache.js';
 import type {
   CityRanking,
   DayWeather,
@@ -21,13 +22,25 @@ console.log(`🚀 Starting server in ${NODE_ENV} mode`);
 console.log(`📡 Port: ${PORT}`);
 console.log(`⏰ Cache TTL: ${CACHE_TTL_MS}ms`);
 
+// Initialize cache manager
+const cache = new CacheManager(CACHE_TTL_MS);
+
 const resolvers = {
   Query: {
     cityRanking: async (
       _: unknown,
       args: { city: string }
     ): Promise<CityRanking> => {
-      // Always compute fresh for now
+      // Check cache first
+      const cached = cache.get(args.city);
+
+      if (cached) {
+        console.log(`Cache hit for: ${args.city}`);
+        return cached;
+      }
+
+      console.log(`Cache miss for: ${args.city}, fetching fresh data...`);
+
       const geo = await geocodeCity(args.city);
       if (!geo) throw new Error('City not found');
 
@@ -53,7 +66,7 @@ const resolvers = {
 
       const activities = buildActivityRankings(days);
 
-      return {
+      const result: CityRanking = {
         city: geo.name,
         ...(geo.country && { country: geo.country }),
         latitude: geo.latitude,
@@ -62,6 +75,12 @@ const resolvers = {
         generatedAt: new Date().toISOString(),
         cache: { hit: false, ttlSeconds: Math.floor(CACHE_TTL_MS / 1000) },
       };
+
+      // Cache the result
+      cache.set(args.city, result);
+      console.log(`Cached data for: ${args.city}`);
+
+      return result;
     },
   },
 };
