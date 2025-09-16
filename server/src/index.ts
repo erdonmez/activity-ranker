@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 import { typeDefs } from './schema.js';
@@ -13,8 +14,12 @@ import type {
 } from '../../packages/shared/dist/types.js';
 
 const PORT = Number(process.env.PORT ?? 4000);
-// Keep TTL env for later, but do not cache yet
 const CACHE_TTL_MS = Number(process.env.CACHE_TTL_MS ?? 30 * 60 * 1000);
+const NODE_ENV = process.env.NODE_ENV ?? 'development';
+
+console.log(`🚀 Starting server in ${NODE_ENV} mode`);
+console.log(`📡 Port: ${PORT}`);
+console.log(`⏰ Cache TTL: ${CACHE_TTL_MS}ms`);
 
 const resolvers = {
   Query: {

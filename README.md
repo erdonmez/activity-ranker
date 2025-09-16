@@ -51,7 +51,10 @@ Stack: Next.js + Apollo Server + GraphQL + TypeScript.
 ### Server (.env)
 
 - `PORT` - Server port (default: 4000)
+- `NODE_ENV` - Environment mode (development/production)
 - `CACHE_TTL_MS` - Cache TTL in milliseconds (default: 1800000 = 30 minutes)
+- `OPEN_METEO_BASE_URL` - Open-Meteo API base URL
+- `GEOCODING_BASE_URL` - Geocoding API base URL
 
 ## Project Structure
 
