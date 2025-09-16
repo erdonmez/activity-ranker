@@ -1,0 +1,11 @@
+# node
+node_modules
+dist
+*.log
+.env
+.env.*
+# next
+.next
+out
+# misc
+.DS_Store
