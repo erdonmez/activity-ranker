@@ -77,6 +77,9 @@ importers:
       graphql:
         specifier: ^16.11.0
         version: 16.11.0
+      zod:
+        specifier: ^4.1.9
+        version: 4.1.9
     devDependencies:
       '@types/node':
         specifier: ^24.5.1
@@ -2396,6 +2399,9 @@ packages:
 
   zen-observable@0.8.15:
     resolution: {integrity: sha512-PQ2PC7R9rslx84ndNBZB/Dkv8V8fZEpk83RLgXtYd0fwUgEjseMn1Dgajh2x6S8QbZAFa9p2qVCEuYZNgve0dQ==}
+
+  zod@4.1.9:
+    resolution: {integrity: sha512-HI32jTq0AUAC125z30E8bQNz0RQ+9Uc+4J7V97gLYjZVKRjeydPgGt6dvQzFrav7MYOUGFqqOGiHpA/fdbd0cQ==}
 
 snapshots:
 
@@ -4881,3 +4887,5 @@ snapshots:
       zen-observable: 0.8.15
 
   zen-observable@0.8.15: {}
+
+  zod@4.1.9: {}
